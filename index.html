@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CivicShield NG — Verify Before You Act</title>
+<meta name="description" content="CivicShield NG helps Nigerians examine suspicious election-related messages, links and screenshots, understand potential threats, and learn to recognize them. Politically neutral." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container">
+    <a href="#/home" class="brand" data-nav-link>CivicShield NG <small>ELECTION INTEGRITY</small></a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Open menu">
+      <span></span>
+    </button>
+    <nav class="main-nav" id="mainNav">
+      <ul>
+        <li><a href="#/home" data-nav-link data-route="home">Home</a></li>
+        <li><a href="#/verify" data-nav-link data-route="verify">Verify</a></li>
+        <li><a href="#/learn" data-nav-link data-route="learn">Learn &amp; Protect</a></li>
+        <li><a href="#/reports" data-nav-link data-route="reports">Threat Reports</a></li>
+        <li><a href="#/about" data-nav-link data-route="about">About</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HOME ============ -->
+  <section class="view" id="view-home" data-view="home">
+    <div class="hero">
+      <div class="container">
+        <h1>Verify Before You Act.</h1>
+        <p class="lede">CivicShield NG helps you understand suspicious election information, identify potential scams and learn how to protect yourself online.</p>
+        <div class="hero-ctas">
+          <a href="#/verify" class="btn btn-primary" data-nav-link>Check a Message</a>
+          <a href="#/learn" class="btn btn-secondary" data-nav-link>Learn How to Stay Safe</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="principle-line">
+      <div class="container">
+        <p>CivicShield does not tell you what to believe or who to support. It helps you examine information and understand the evidence available.</p>
+      </div>
+    </div>
+
+    <div class="capabilities">
+      <div class="container">
+        <div class="section-header">
+          <h2>Three ways CivicShield helps</h2>
+          <p>A simple, calm process for handling information you're not sure about.</p>
+        </div>
+        <div class="capability-grid">
+          <div class="capability">
+            <span class="index">Verify</span>
+            <h3>Check what you received</h3>
+            <p>Check suspicious election messages, links, screenshots and claims before you act on them.</p>
+          </div>
+          <div class="capability">
+            <span class="index">Protect</span>
+            <h3>Understand the threat</h3>
+            <p>Understand phishing, impersonation, scams and manipulated content in plain language.</p>
+          </div>
+          <div class="capability">
+            <span class="index">Learn</span>
+            <h3>Build lasting judgment</h3>
+            <p>Build the knowledge needed to recognize suspicious information yourself, next time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Trusted official sources</h2>
+          <p>These are official information resources. Listing them here does not mean CivicShield has confirmed any specific claim against them — always check directly.</p>
+        </div>
+        <div class="trust-links" id="trustedSourcesHome"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VERIFY ============ -->
+  <section class="view" id="view-verify" data-view="verify">
+    <div class="section">
+      <div class="container verify-layout">
+        <div>
+          <div class="section-header">
+            <h2>Check Something You Received</h2>
+            <p>Paste a message, claim or website link below. You can also upload a screenshot for analysis.</p>
+          </div>
+
+          <form id="verifyForm" novalidate>
+            <div class="field-group">
+              <label class="field-label" for="verifyText">Message or claim</label>
+              <textarea id="verifyText" name="text" placeholder="Paste the message or claim here…"></textarea>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="verifyUrl">Website link (optional)</label>
+              <input type="url" id="verifyUrl" name="url" placeholder="Paste a website link if one is included…" />
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="verifyImage">Screenshot (optional)</label>
+              <div class="upload-zone" id="uploadZone" tabindex="0" role="button" aria-describedby="uploadHint">
+                <div id="uploadPrompt">
+                  <p style="margin:0 0 4px; color: var(--ink-soft);">Click to upload a screenshot</p>
+                  <p class="field-hint" id="uploadHint" style="margin:0;">JPG, PNG or WEBP, up to 6MB</p>
+                </div>
+                <div id="uploadPreviewWrap" style="display:none;">
+                  <img id="uploadPreview" class="upload-preview" alt="Uploaded screenshot preview" />
+                  <button type="button" class="btn btn-secondary btn-small upload-remove" id="removeImage">Remove image</button>
+                </div>
+                <input type="file" id="verifyImage" accept="image/jpeg,image/jpg,image/png,image/webp" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" id="analyzeBtn">Analyze</button>
+              <button type="button" class="demo-link" id="demoBtn">Try a Demo instead</button>
+            </div>
+            <div id="verifyError" class="form-error" style="display:none;" role="alert"></div>
+          </form>
+
+          <div id="verifyLoading" class="loading-state" style="display:none;" role="status" aria-live="polite">
+            <span class="loading-dot" aria-hidden="true"></span>
+            <span id="loadingText">Examining the information…</span>
+          </div>
+
+          <div id="resultWrap"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEARN & PROTECT ============ -->
+  <section class="view" id="view-learn" data-view="learn">
+    <div class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Learn &amp; Protect</h2>
+          <p>Short lessons built around realistic Nigerian scenarios, so you can recognize threats yourself — no account needed. Your progress is saved on this device only.</p>
+        </div>
+
+        <div class="value-list" style="margin-bottom:34px;">
+          <div class="value-item">
+            <h3>Know the process</h3>
+            <p>Only INEC registers voters and conducts elections. Your PVC (Permanent Voter Card) is collected free at your registered INEC office. On election day, accreditation is done with the BVAS (Bimodal Voter Accreditation System), which verifies your fingerprint or facial data before you vote. Results are uploaded from the polling unit to INEC's public result viewing portal (IReV) after collation on the spot — you can watch this happen. No one but INEC issues PVCs, and no fee is ever charged for registration or collection.</p>
+          </div>
+          <div class="value-item">
+            <h3>Do</h3>
+            <p>Verify your polling unit and registration status only on INEC's official portal. Vote in secret and report anyone watching how you mark your ballot. Confirm your result was uploaded to IReV before believing a "leaked" result shared elsewhere. Report vote buying, violence or underage voting to INEC or security agencies on the ground.</p>
+          </div>
+          <div class="value-item">
+            <h3>Don't</h3>
+            <p>Don't pay anyone for a PVC, registration or "accreditation slot" — it's always free. Don't share your NIN, BVN, OTP or PVC details to "confirm" your vote. Don't trust results announced on social media before INEC's official collation. Don't accept money or gifts for your vote — vote buying is an electoral offense under Nigerian law.</p>
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%;"></div></div>
+          <span class="progress-label" id="progressLabel">0 of 10 lessons completed</span>
+        </div>
+
+        <div id="lessonListWrap">
+          <div class="lesson-list" id="lessonList"></div>
+        </div>
+
+        <div id="lessonDetailWrap"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THREAT REPORTS ============ -->
+  <section class="view" id="view-reports" data-view="reports">
+    <div class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Demonstration Threat Reports</h2>
+          <p>This hackathon demonstration uses sample reports. A production version would require a secure reporting backend and moderation process.</p>
+        </div>
+        <div class="demo-banner">These are labelled demonstration examples, not live reports.</div>
+        <div class="report-grid" id="reportGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="view" id="view-about" data-view="about">
+    <div class="section">
+      <div class="container" style="max-width: 760px;">
+        <div class="section-header">
+          <h2>About CivicShield NG</h2>
+          <p>CivicShield NG helps citizens examine election-related information, understand potential digital threats and improve their digital literacy.</p>
+        </div>
+
+        <h3>Why CivicShield?</h3>
+        <div class="value-list">
+          <div class="value-item">
+            <h3>Verify before you act.</h3>
+            <p>Before you forward a message, click a link, or register through a form, take a moment to check it.</p>
+          </div>
+          <div class="value-item">
+            <h3>Protect your information.</h3>
+            <p>Personal details like your NIN, BVN, passwords and OTPs should never be requested through unsolicited messages.</p>
+          </div>
+          <div class="value-item">
+            <h3>Learn to recognize suspicious content.</h3>
+            <p>The goal is not to depend on a tool forever — it's to build judgment you can rely on yourself.</p>
+          </div>
+        </div>
+
+        <div class="neutral-statement">
+          <p>CivicShield is politically neutral. It does not endorse candidates, parties or political positions.</p>
+        </div>
+
+        <div class="section-header" style="margin-top:44px;">
+          <h3>How the analysis works</h3>
+          <p>When you submit a message, link or screenshot, it is sent to a language model that reasons only over what you provided and clearly labelled reference information. It does not browse the internet or independently confirm facts, and it will tell you when verification could not be performed.</p>
+        </div>
+
+        <div class="trust-links" id="trustedSourcesAbout"></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a href="#/home" data-nav-link>Home</a>
+      <a href="#/verify" data-nav-link>Verify</a>
+      <a href="#/learn" data-nav-link>Learn &amp; Protect</a>
+      <a href="#/reports" data-nav-link>Threat Reports</a>
+      <a href="#/about" data-nav-link>About</a>
+    </div>
+    <p>CivicShield NG is a hackathon demonstration. It is politically neutral and does not endorse any candidate or party.</p>
+    <p>AI-generated analysis can be wrong. Always confirm important election information through authoritative sources.</p>
+  </div>
+</footer>
+
+<div id="toast-region" aria-live="polite"></div>
+
+<script src="js/ui.js"></script>
+<script src="js/verify.js"></script>
+<script src="js/learn.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

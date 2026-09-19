@@ -1,0 +1,22 @@
+# .htaccess — only used when running under Apache/XAMPP.
+# Netlify ignores this file entirely (it uses netlify.toml's [[redirects]] instead)
+# so the same project works unmodified on both.
+#
+# Requires mod_rewrite enabled and AllowOverride All for this folder.
+# XAMPP has mod_rewrite enabled by default; if this doesn't work, check
+# AllowOverride in your Apache config (see README.md "Running on XAMPP").
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # /api/analyze  ->  api/analyze.php  (js/verify.js calls this same URL
+  # whether it's served by Netlify's function or this PHP file)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^api/analyze/?$ api/analyze.php [L,QSA]
+</IfModule>
+
+# Never serve the local secret config or env files directly.
+<FilesMatch "^(config\.local\.php|\.env.*)$">
+  Require all denied
+</FilesMatch>

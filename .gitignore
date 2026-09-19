@@ -1,0 +1,13 @@
+# Never commit secrets
+.env
+.env.*
+!.env.example
+api/config.local.php
+
+# Netlify / Node
+.netlify/
+node_modules/
+npm-debug.log*
+
+# OS
+.DS_Store
